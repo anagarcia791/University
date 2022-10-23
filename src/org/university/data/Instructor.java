@@ -6,6 +6,7 @@ public abstract class Instructor extends UniversityMember {
 
     // constructor
     public Instructor() {}
+
     public Instructor(String fullName, String username, Double baseSalary) {
         super(fullName, username);
         this.baseSalary = baseSalary;

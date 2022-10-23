@@ -8,6 +8,7 @@ public class Student extends UniversityMember {
 
     // constructor
     public Student() {}
+
     public Student(String fullName, String username, Integer studentAge) {
         super(fullName, username);
         this.studentId = ++studentIdCount;

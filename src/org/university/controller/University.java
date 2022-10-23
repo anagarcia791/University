@@ -42,6 +42,7 @@ public class University {
     public List<UniversityMember> getUniversityMemberList() {
         return universityMemberList;
     }
+
     public void addInstructor(Instructor instructor) {
         if(!this.instructorList.contains(instructor)){
             this.instructorList.add(instructor);

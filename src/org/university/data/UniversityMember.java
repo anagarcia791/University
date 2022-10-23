@@ -7,6 +7,7 @@ public class UniversityMember {
 
     // constructor
     public UniversityMember() {}
+
     public UniversityMember(String fullName, String username) {
         this.fullName = fullName;
         this.username = username;

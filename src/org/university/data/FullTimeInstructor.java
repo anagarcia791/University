@@ -6,6 +6,7 @@ public class FullTimeInstructor extends Instructor {
 
     // constructor
     public FullTimeInstructor() {}
+
     public FullTimeInstructor(String fullName, String username, Double baseSalary, Integer experienceYears) {
         super(fullName, username, baseSalary);
         this.experienceYears = experienceYears;

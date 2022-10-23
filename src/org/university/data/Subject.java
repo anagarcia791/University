@@ -13,6 +13,7 @@ public class Subject {
 
     // constructor
     public Subject() {}
+
     public Subject(String subjectName, Instructor subjectInstructor) {
         this.subjectName = subjectName;
         this.classroom = "A-" + ++classroomInt;
@@ -30,6 +31,7 @@ public class Subject {
             this.subjectStudentList.add(student);
         }
     }
+
     @Override
     public String toString() {
         return "\n" + "subjectName = " + subjectName +

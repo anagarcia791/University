@@ -6,6 +6,7 @@ public class PartTimeInstructor extends Instructor {
 
     // constructor
     public PartTimeInstructor() {}
+
     public PartTimeInstructor(String fullName, String username, Double baseSalary, Integer activeHoursPerMonth) {
         super(fullName, username, baseSalary);
         this.activeHoursPerMonth = activeHoursPerMonth;
