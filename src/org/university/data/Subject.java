@@ -27,7 +27,7 @@ public class Subject {
     }
 
     public void addSubjectStudent(Student student) {
-        if(!this.subjectStudentList.contains(student)){
+        if (!this.subjectStudentList.contains(student)) {
             this.subjectStudentList.add(student);
         }
     }

@@ -14,6 +14,10 @@ public class UniversityMember {
     }
 
     // methods
+    public String getUsername() {
+        return username;
+    }
+
     @Override
     public String toString() {
         return fullName + ", username = " + username;
