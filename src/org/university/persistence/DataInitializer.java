@@ -70,24 +70,21 @@ public class DataInitializer {
     }
 
     private static void loadStudentsIntoEachSubject(University university){
-        List<Subject> subjectList = university.getSubjectList();
-        List<Student> studentList = university.getStudentList();
+        university.addSubjectStudentByIndex(0,0);
+        university.addSubjectStudentByIndex(0,1);
+        university.addSubjectStudentByIndex(0,2);
 
-        subjectList.get(0).addSubjectStudent(studentList.get(0));
-        subjectList.get(0).addSubjectStudent(studentList.get(1));
-        subjectList.get(0).addSubjectStudent(studentList.get(2));
+        university.addSubjectStudentByIndex(1,0);
+        university.addSubjectStudentByIndex(1,1);
+        university.addSubjectStudentByIndex(1,2);
 
-        subjectList.get(1).addSubjectStudent(studentList.get(0));
-        subjectList.get(1).addSubjectStudent(studentList.get(1));
-        subjectList.get(1).addSubjectStudent(studentList.get(2));
+        university.addSubjectStudentByIndex(2,3);
+        university.addSubjectStudentByIndex(2,4);
+        university.addSubjectStudentByIndex(2,5);
 
-        subjectList.get(2).addSubjectStudent(studentList.get(3));
-        subjectList.get(2).addSubjectStudent(studentList.get(4));
-        subjectList.get(2).addSubjectStudent(studentList.get(5));
-
-        subjectList.get(3).addSubjectStudent(studentList.get(3));
-        subjectList.get(3).addSubjectStudent(studentList.get(4));
-        subjectList.get(3).addSubjectStudent(studentList.get(5));
+        university.addSubjectStudentByIndex(3,3);
+        university.addSubjectStudentByIndex(3,4);
+        university.addSubjectStudentByIndex(3,5);
     }
 
     private static void loadUniversityMembersIntoUniversity(University university){

@@ -23,6 +23,25 @@ public class University {
     }
 
     // methods
+    public String getUniversityName() {
+        return universityName;
+    }
+
+    public List<Instructor> getInstructorList() {
+        return instructorList;
+    }
+
+    public List<Student> getStudentList() {
+        return studentList;
+    }
+
+    public List<Subject> getSubjectList() {
+        return subjectList;
+    }
+
+    public List<UniversityMember> getUniversityMemberList() {
+        return universityMemberList;
+    }
     public void addInstructor(Instructor instructor) {
         if(!this.instructorList.contains(instructor)){
             this.instructorList.add(instructor);
@@ -45,23 +64,34 @@ public class University {
         this.universityMemberList.add(universityMember);
     }
 
-    public String getUniversityName() {
-        return universityName;
+    public Subject getSubjectByIndex(int index) {
+        Subject subject = new Subject();
+        try {
+            return this.subjectList.get(index);
+        }catch (Exception ex){
+            return subject;
+        }
     }
 
-    public List<Instructor> getInstructorList() {
-        return instructorList;
+    public Student getStudentByIndex(int index) {
+        Student student = new Student();
+        try {
+            return this.studentList.get(index);
+        }catch (Exception ex){
+            return student;
+        }
     }
 
-    public List<Student> getStudentList() {
-        return studentList;
-    }
+    public String addSubjectStudentByIndex(int subjectIndex, int studentIndex){
+        if(getSubjectByIndex(subjectIndex).getSubjectName() != null
+                && getStudentByIndex(studentIndex).getStudentId() != null){
 
-    public List<Subject> getSubjectList() {
-        return subjectList;
-    }
+            getSubjectByIndex(subjectIndex).addSubjectStudent(getStudentByIndex(studentIndex));
 
-    public List<UniversityMember> getUniversityMemberList() {
-        return universityMemberList;
+            return "Student with id " +  getStudentByIndex(studentIndex).getStudentId() +
+                    " added to " + getSubjectByIndex(subjectIndex).getSubjectName();
+
+        }
+        return "Check the subject or student id";
     }
 }

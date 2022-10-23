@@ -2,9 +2,10 @@ package org.university.data;
 
 public class FullTimeInstructor extends Instructor {
     // attributes
-    private final Integer experienceYears;
+    private Integer experienceYears;
 
     // constructor
+    public FullTimeInstructor() {}
     public FullTimeInstructor(String fullName, String username, Double baseSalary, Integer experienceYears) {
         super(fullName, username, baseSalary);
         this.experienceYears = experienceYears;

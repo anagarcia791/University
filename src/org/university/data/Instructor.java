@@ -2,9 +2,10 @@ package org.university.data;
 
 public abstract class Instructor extends UniversityMember {
     // attributes
-    private final Double baseSalary;
+    private Double baseSalary;
 
     // constructor
+    public Instructor() {}
     public Instructor(String fullName, String username, Double baseSalary) {
         super(fullName, username);
         this.baseSalary = baseSalary;

@@ -2,11 +2,12 @@ package org.university.data;
 
 public class Student extends UniversityMember {
     // attributes
-    private final Integer studentId;
+    private Integer studentId;
     private static Integer studentIdCount = 0;
-    private final Integer studentAge;
+    private Integer studentAge;
 
     // constructor
+    public Student() {}
     public Student(String fullName, String username, Integer studentAge) {
         super(fullName, username);
         this.studentId = ++studentIdCount;
@@ -14,4 +15,13 @@ public class Student extends UniversityMember {
     }
 
     // methods
+    public Integer getStudentId() {
+        return studentId;
+    }
+
+    @Override
+    public String toString() {
+        return "studentId = " + studentId +
+                ", studentAge = " + studentAge;
+    }
 }
