@@ -93,14 +93,16 @@ public class University {
 
     public boolean checkIfUsernameExists(String username) {
         List<UniversityMember> memberList =
-                this.universityMemberList.stream().filter(member -> username.equals(member.getUsername())).toList();
+                this.universityMemberList.stream().
+                        filter(member -> username.equals(member.getUsername())).toList();
 
         return memberList.size() == 0;
     }
 
     public boolean checkIfSubjectExists(String subjectName) {
         List<Subject> subjectList =
-                this.subjectList.stream().filter(subject -> subjectName.equals(subject.getSubjectName())).toList();
+                this.subjectList.stream().
+                        filter(subject -> subjectName.equals(subject.getSubjectName())).toList();
 
         return subjectList.size() == 0;
     }
