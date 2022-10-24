@@ -15,7 +15,7 @@ public class Main {
 
         System.out.println("\n «« Welcome to " + university.getUniversityName() + " University »» ");
 
-        int EXIT_OPTION = 5;
+        int EXIT_OPTION = 9;
 
         do {
             selectedOption = 0;
@@ -43,6 +43,18 @@ public class Main {
                     case 4:
                         displayUniversityMemberData(university);
                         break;
+                    case 5:
+                        searchSubjectsByStudentId(university);
+                        break;
+                    case 6:
+                        triggerCreateNewStudent(university);
+                        break;
+                    case 7:
+                        triggerCreateNewSubject(university);
+                        break;
+                    case 8:
+                        triggerAddSubjectStudentByIndex(university);
+                        break;
                 }
             }
 
@@ -59,7 +71,11 @@ public class Main {
                 " 2. Print student's data \n" +
                 " 3. Print university's subjects \n" +
                 " 4. Print university's members \n" +
-                " 5. Exit \n");
+                " 5. Search enrolled subjects, by student id \n" +
+                " 6. Create new student \n" +
+                " 7. Create new subject \n" +
+                " 8. Add student to a subject \n" +
+                " 9. Exit \n");
     }
 
     private static String tryAgainMessage() {
@@ -83,7 +99,8 @@ public class Main {
 
         for (Instructor instructor : university.getInstructorList()) {
             System.out.println("\n" + "Name: " + instructor.getFullName() + " - Username: " + instructor.getUsername() +
-                    " - Monthly salary: " + instructor.salaryCalculation(instructor.getBaseSalary()));
+                    " - Monthly salary: " +
+                    String.format("%,.2f", instructor.salaryCalculation(instructor.getBaseSalary())));
         }
 
         System.out.println("\n" + comingBackMessage());
@@ -111,12 +128,12 @@ public class Main {
             System.out.println(noElementsMessage());
         }
 
+        int index = 0;
+
         for (Subject subject : university.getSubjectList()) {
-            System.out.println("\n" + "Subject: " + subject.getSubjectName() + " - Classroom: " + subject.getClassroom() +
+            System.out.println("\n" + ++index + ". Subject: " + subject.getSubjectName() + " - Classroom: " + subject.getClassroom() +
                     " - Instructor: " + subject.getSubjectInstructorName());
         }
-
-        System.out.println("\n" + comingBackMessage());
     }
 
     private static void displayUniversityMemberData(University university) {
@@ -130,6 +147,26 @@ public class Main {
             System.out.println("\n" + "Name: " + member.getFullName() + " - Username: " + member.getUsername());
         }
 
+        System.out.println("\n" + comingBackMessage());
+    }
+
+    private static void searchSubjectsByStudentId(University university) {
+        System.out.println("**** \uD83E\uDD13 **** Subjects in which student is enrolled **** \uD83E\uDD13 ****\t");
+        System.out.println("\n" + comingBackMessage());
+    }
+
+    private static void triggerCreateNewStudent(University university){
+        System.out.println("**** \uD83D\uDE00 **** Section for create new student **** \uD83D\uDE00 ****\t");
+        System.out.println("\n" + comingBackMessage());
+    }
+
+    private static void triggerCreateNewSubject(University university){
+        System.out.println("**** \uD83D\uDCDA **** Section for create new subject **** \uD83D\uDCDA ****\t");
+        System.out.println("\n" + comingBackMessage());
+    }
+
+    private static void triggerAddSubjectStudentByIndex(University university){
+        System.out.println("**** ✏ **** Section for add student to a subject **** ✏ ****\t");
         System.out.println("\n" + comingBackMessage());
     }
 
