@@ -4,6 +4,7 @@ import org.university.data.*;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 public class University {
     // attributes
@@ -94,7 +95,7 @@ public class University {
     public boolean checkIfUsernameExists(String username) {
         List<UniversityMember> memberList =
                 this.universityMemberList.stream().
-                        filter(member -> username.equals(member.getUsername())).toList();
+                        filter(member -> username.equals(member.getUsername())).collect(Collectors.toList());
 
         return memberList.size() == 0;
     }
@@ -102,7 +103,7 @@ public class University {
     public boolean checkIfSubjectExists(String subjectName) {
         List<Subject> subjectList =
                 this.subjectList.stream().
-                        filter(subject -> subjectName.equals(subject.getSubjectName())).toList();
+                        filter(subject -> subjectName.equals(subject.getSubjectName())).collect(Collectors.toList());
 
         return subjectList.size() == 0;
     }
