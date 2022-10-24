@@ -26,17 +26,25 @@ public class Subject {
         return subjectName;
     }
 
+    public String getClassroom() {
+        return classroom;
+    }
+
+    public Instructor getSubjectInstructor() {
+        return subjectInstructor;
+    }
+
+    public List<Student> getSubjectStudentList() {
+        return subjectStudentList;
+    }
+
+    public String getSubjectInstructorName(){
+        return subjectInstructor.getFullName();
+    }
+
     public void addSubjectStudent(Student student) {
         if (!this.subjectStudentList.contains(student)) {
             this.subjectStudentList.add(student);
         }
-    }
-
-    @Override
-    public String toString() {
-        return "\n" + "subjectName = " + subjectName +
-                ", classroom = " + classroom +
-                ", subjectInstructor = " + subjectInstructor +
-                ", subjectStudentList = " + subjectStudentList;
     }
 }

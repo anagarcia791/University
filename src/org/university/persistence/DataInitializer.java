@@ -3,8 +3,6 @@ package org.university.persistence;
 import org.university.controller.University;
 import org.university.data.*;
 
-import java.util.List;
-
 public class DataInitializer {
     public static University loadUniversity() {
         University university = new University("EAN");

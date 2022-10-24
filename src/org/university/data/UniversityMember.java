@@ -14,12 +14,11 @@ public class UniversityMember {
     }
 
     // methods
-    public String getUsername() {
-        return username;
+    public String getFullName() {
+        return fullName;
     }
 
-    @Override
-    public String toString() {
-        return fullName + ", username = " + username;
+    public String getUsername() {
+        return username;
     }
 }

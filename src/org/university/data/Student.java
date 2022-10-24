@@ -20,9 +20,7 @@ public class Student extends UniversityMember {
         return studentId;
     }
 
-    @Override
-    public String toString() {
-        return "studentId = " + studentId +
-                ", studentAge = " + studentAge;
+    public Integer getStudentAge() {
+        return studentAge;
     }
 }
