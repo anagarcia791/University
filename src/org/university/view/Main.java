@@ -85,6 +85,10 @@ public class Main {
         return ">>>>>>>>> Coming back to principal menu <<<<<<<<<";
     }
 
+    private static String errorMessage() {
+        return "\n       ❗       Error occurred       ❗       ";
+    }
+
     private static void displayInstructorsData(University university) {
         System.out.println("**** \uD83D\uDC69\u200D\uD83C\uDFEB **** Instructor's data **** \uD83D\uDC68\u200D\uD83C\uDFEB ****\n");
 
@@ -92,8 +96,9 @@ public class Main {
             System.out.println(noElementsMessage());
         }
 
+        int instructorId = 0;
         for (int i = 0; i < university.getInstructorListSize(); i++) {
-            System.out.println(university.getInstructorByIndex(i));
+            System.out.println("Instructor Id: " + (++instructorId) + " - " + university.getInstructorByIndex(i));
         }
 
         System.out.println("\n" + comingBackMessage());
@@ -123,27 +128,72 @@ public class Main {
         int subjectId = 0;
 
         for (int i = 0; i < university.getSubjectListSize(); i++) {
-            System.out.println((++subjectId) + ". " + university.getSubjectByIndex(i));
+            System.out.println("Subject Id: " + (++subjectId) + " - " + university.getSubjectByIndex(i));
         }
     }
 
     private static void searchSubjectsByStudentId(University university) {
-        System.out.println("**** \uD83E\uDD13 **** Subjects in which student is enrolled **** \uD83E\uDD13 ****\t");
+        System.out.println("**** \uD83E\uDD13 **** Subjects in which student is enrolled **** \uD83E\uDD13 ****\n");
         System.out.println("\n" + comingBackMessage());
     }
 
     private static void triggerCreateNewStudent(University university) {
-        System.out.println("**** \uD83D\uDE00 **** Section for create new student **** \uD83D\uDE00 ****\t");
+        Scanner scan = new Scanner(System.in);
+        System.out.println("**** \uD83D\uDE00 **** Section for create new student **** \uD83D\uDE00 ****\n");
+
+        try {
+            System.out.println("Type full name");
+            String fullName = scan.nextLine();
+
+            System.out.println("Type username");
+            String username = scan.nextLine();
+
+            System.out.println("Type student age");
+            int studentAge = scan.nextInt();
+
+            System.out.println("\n" + university.createNewStudent(fullName, username, studentAge));
+        } catch (Exception ex) {
+            System.out.println(errorMessage());
+        }
+
         System.out.println("\n" + comingBackMessage());
     }
 
     private static void triggerCreateNewSubject(University university) {
-        System.out.println("**** \uD83D\uDCDA **** Section for create new subject **** \uD83D\uDCDA ****\t");
+        Scanner scan = new Scanner(System.in);
+        System.out.println("**** \uD83D\uDCDA **** Section for create new subject **** \uD83D\uDCDA ****\n");
+
+        try {
+            System.out.println("Type subject name");
+            String subjectName = scan.nextLine();
+
+            System.out.println("Type instructor id for the subject");
+            int instructorIndex = scan.nextInt();
+
+            System.out.println("\n" + university.createNewSubject(subjectName, (instructorIndex - 1)));
+        } catch (Exception ex) {
+            System.out.println(errorMessage());
+        }
+
         System.out.println("\n" + comingBackMessage());
     }
 
     private static void triggerAddSubjectStudentByIndex(University university) {
-        System.out.println("**** ✏ **** Section for add student to a subject **** ✏ ****\t");
+        Scanner scan = new Scanner(System.in);
+        System.out.println("**** ✏ **** Section for add student to a subject **** ✏ ****\n");
+
+        try {
+            System.out.println("Type subject id");
+            int subjectIndex = scan.nextInt();
+
+            System.out.println("Type student id");
+            int studentIndex = scan.nextInt();
+
+            System.out.println("\n" + university.addSubjectStudentByIndex((subjectIndex - 1), (studentIndex - 1)));
+        } catch (Exception ex) {
+            System.out.println(errorMessage());
+        }
+
         System.out.println("\n" + comingBackMessage());
     }
 

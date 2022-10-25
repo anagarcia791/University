@@ -32,11 +32,12 @@ public class Subject {
             this.subjectStudentList.add(student);
             return "Student with id " + student.getStudentId() + " added to " + this.subjectName;
         }
-        return "student's already enrolled in " + this.subjectName + "subject";
+        return "Student with id " + student.getStudentId() + " is already enrolled in " + this.subjectName + " subject";
     }
 
     @Override
     public String toString() {
-        return "Subject: " + this.subjectName + " - Classroom: " + this.classroom + " - Instructor: " + subjectInstructor.fullName;
+        return "Subject: " + this.subjectName + " - Classroom: " + this.classroom +
+                " - Instructor: " + subjectInstructor.fullName;
     }
 }

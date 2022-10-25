@@ -126,7 +126,7 @@ public class University {
 
             return "New subject " + "'" + subjectName + "'" + " successfully created";
         }
-        return "Check the given information for create a new subject";
+        return "The subject already exists, or the id is incorrect";
     }
 
     public String addSubjectStudentByIndex(int subjectIndex, int studentIndex) {
