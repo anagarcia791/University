@@ -5,7 +5,8 @@ public class FullTimeInstructor extends Instructor {
     private Integer experienceYears;
 
     // constructor
-    public FullTimeInstructor() {}
+    public FullTimeInstructor() {
+    }
 
     public FullTimeInstructor(String fullName, String username, Double baseSalary, Integer experienceYears) {
         super(fullName, username, baseSalary);
@@ -13,7 +14,17 @@ public class FullTimeInstructor extends Instructor {
     }
 
     // methods
-    public double salaryCalculation(Double baseSalary) {
-        return (baseSalary * (this.experienceYears * 1.1));
+    public double salaryCalculation() {
+        return (this.baseSalary * (this.experienceYears * 1.1));
+    }
+
+    @Override
+    public String toString() {
+        return "Full time instructor -> " +
+                " Name: " + this.fullName +
+                " - Username: " + this.username +
+                " - Base salary: " + this.baseSalary +
+                " - Experience years: " + this.experienceYears +
+                " - Monthly salary: " + String.format("%,.1f", salaryCalculation());
     }
 }

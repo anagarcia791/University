@@ -1,7 +1,6 @@
 package org.university.persistence;
 
 import org.university.controller.University;
-import org.university.data.*;
 
 public class DataInitializer {
     public static University loadUniversity() {
@@ -38,8 +37,8 @@ public class DataInitializer {
     private static void loadSubjectsIntoUniversity(University university) {
         university.createNewSubject("Microeconomics", 0);
         university.createNewSubject("Macroeconomics", 2);
-        university.createNewSubject("History", 1);
         university.createNewSubject("Econometrics", 0);
+        university.createNewSubject("History", 1);
     }
 
     private static void loadStudentsIntoEachSubject(University university) {
@@ -61,12 +60,12 @@ public class DataInitializer {
     }
 
     private static void loadUniversityMembersIntoUniversity(University university) {
-        for (Instructor instructor : university.getInstructorList()) {
-            university.addUniversityMember(instructor);
+        for (int i = 0; i < university.getInstructorListSize(); i++) {
+            university.addUniversityMember(university.getInstructorByIndex(i));
         }
 
-        for (Student student : university.getStudentList()) {
-            university.addUniversityMember(student);
+        for (int i = 0; i < university.getStudentListSize(); i++) {
+            university.addUniversityMember(university.getStudentByIndex(i));
         }
     }
 }

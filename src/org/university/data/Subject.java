@@ -12,7 +12,8 @@ public class Subject {
     private List<Student> subjectStudentList;
 
     // constructor
-    public Subject() {}
+    public Subject() {
+    }
 
     public Subject(String subjectName, Instructor subjectInstructor) {
         this.subjectName = subjectName;
@@ -26,25 +27,16 @@ public class Subject {
         return subjectName;
     }
 
-    public String getClassroom() {
-        return classroom;
-    }
-
-    public Instructor getSubjectInstructor() {
-        return subjectInstructor;
-    }
-
-    public List<Student> getSubjectStudentList() {
-        return subjectStudentList;
-    }
-
-    public String getSubjectInstructorName(){
-        return subjectInstructor.getFullName();
-    }
-
-    public void addSubjectStudent(Student student) {
+    public String addSubjectStudent(Student student) {
         if (!this.subjectStudentList.contains(student)) {
             this.subjectStudentList.add(student);
+            return "Student with id " + student.getStudentId() + " added to " + this.subjectName;
         }
+        return "student's already enrolled in " + this.subjectName + "subject";
+    }
+
+    @Override
+    public String toString() {
+        return "Subject: " + this.subjectName + " - Classroom: " + this.classroom + " - Instructor: " + subjectInstructor.fullName;
     }
 }

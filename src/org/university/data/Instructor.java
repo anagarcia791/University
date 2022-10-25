@@ -2,10 +2,11 @@ package org.university.data;
 
 public abstract class Instructor extends UniversityMember {
     // attributes
-    private Double baseSalary;
+    protected Double baseSalary;
 
     // constructor
-    public Instructor() {}
+    public Instructor() {
+    }
 
     public Instructor(String fullName, String username, Double baseSalary) {
         super(fullName, username);
@@ -17,5 +18,5 @@ public abstract class Instructor extends UniversityMember {
         return baseSalary;
     }
 
-    public abstract double salaryCalculation(Double baseSalary);
+    public abstract double salaryCalculation();
 }

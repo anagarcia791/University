@@ -2,11 +2,12 @@ package org.university.data;
 
 public class UniversityMember {
     // attributes
-    private String fullName;
-    private String username;
+    protected String fullName;
+    protected String username;
 
     // constructor
-    public UniversityMember() {}
+    public UniversityMember() {
+    }
 
     public UniversityMember(String fullName, String username) {
         this.fullName = fullName;
@@ -14,10 +15,6 @@ public class UniversityMember {
     }
 
     // methods
-    public String getFullName() {
-        return fullName;
-    }
-
     public String getUsername() {
         return username;
     }

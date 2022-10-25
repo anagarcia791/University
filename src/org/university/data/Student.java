@@ -7,7 +7,8 @@ public class Student extends UniversityMember {
     private Integer studentAge;
 
     // constructor
-    public Student() {}
+    public Student() {
+    }
 
     public Student(String fullName, String username, Integer studentAge) {
         super(fullName, username);
@@ -20,7 +21,8 @@ public class Student extends UniversityMember {
         return studentId;
     }
 
-    public Integer getStudentAge() {
-        return studentAge;
+    @Override
+    public String toString() {
+        return "Id: " + this.studentId + " - Name: " + this.fullName + " - Username: " + this.username + " - Age: " + this.studentAge;
     }
 }
