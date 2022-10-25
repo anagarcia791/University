@@ -119,7 +119,7 @@ public class University {
 
     public String createNewSubject(String subjectName, int instructorIndex) {
         if (checkIfSubjectExists(subjectName) &&
-                getInstructorByIndex(instructorIndex).getBaseSalary() != null) {
+                getInstructorByIndex(instructorIndex).getInstructorId() != null) {
 
             Subject newSubject = new Subject(subjectName, getInstructorByIndex(instructorIndex));
             this.subjectList.add(newSubject);

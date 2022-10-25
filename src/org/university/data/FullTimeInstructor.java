@@ -15,15 +15,16 @@ public class FullTimeInstructor extends Instructor {
 
     // methods
     public double salaryCalculation() {
-        return (this.baseSalary * (this.experienceYears * 1.1));
+        return (super.baseSalary * (this.experienceYears * 1.1));
     }
 
     @Override
     public String toString() {
-        return "Full time instructor -> " +
-                " Name: " + this.fullName +
-                " - Username: " + this.username +
-                " - Base salary: " + this.baseSalary +
+        return "Instructor Id: " + super.instructorId +
+                ". | Full time | -> " +
+                " Name: " + super.fullName +
+                " - Username: " + super.username +
+                " - Base salary: " + super.baseSalary +
                 " - Experience years: " + this.experienceYears +
                 " - Monthly salary: " + String.format("%,.1f", salaryCalculation());
     }

@@ -5,6 +5,8 @@ import java.util.List;
 
 public class Subject {
     // attributes
+    private Integer subjectId;
+    private static Integer subjectIdCount = 0;
     private String subjectName;
     private String classroom;
     private static Integer classroomInt = 0;
@@ -16,6 +18,7 @@ public class Subject {
     }
 
     public Subject(String subjectName, Instructor subjectInstructor) {
+        this.subjectId = ++subjectIdCount;
         this.subjectName = subjectName;
         this.classroom = "A-" + ++classroomInt;
         this.subjectInstructor = subjectInstructor;
@@ -37,7 +40,7 @@ public class Subject {
 
     @Override
     public String toString() {
-        return "Subject: " + this.subjectName + " - Classroom: " + this.classroom +
-                " - Instructor: " + subjectInstructor.fullName;
+        return "Subject Id: " + this.subjectId + " - Subject: " + this.subjectName +
+                " - Classroom: " + this.classroom + " - Instructor: " + subjectInstructor.getUsername();
     }
 }

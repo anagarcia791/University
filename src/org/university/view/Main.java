@@ -96,9 +96,8 @@ public class Main {
             System.out.println(noElementsMessage());
         }
 
-        int instructorId = 0;
         for (int i = 0; i < university.getInstructorListSize(); i++) {
-            System.out.println("Instructor Id: " + (++instructorId) + " - " + university.getInstructorByIndex(i));
+            System.out.println(university.getInstructorByIndex(i));
         }
 
         System.out.println("\n" + comingBackMessage());
@@ -125,10 +124,8 @@ public class Main {
             System.out.println(noElementsMessage());
         }
 
-        int subjectId = 0;
-
         for (int i = 0; i < university.getSubjectListSize(); i++) {
-            System.out.println("Subject Id: " + (++subjectId) + " - " + university.getSubjectByIndex(i));
+            System.out.println(university.getSubjectByIndex(i));
         }
     }
 
