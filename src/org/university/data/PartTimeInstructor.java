@@ -12,15 +12,16 @@ public class PartTimeInstructor extends Instructor {
 
     // methods
     public double salaryCalculation() {
-        return ((this.baseSalary / 192) * (this.activeHoursPerMonth));
+        return ((super.baseSalary / 192) * (this.activeHoursPerMonth));
     }
 
     @Override
     public String toString() {
-        return "Part time instructor -> " +
-                " Name: " + this.fullName +
-                " - Username: " + this.username +
-                " - Base salary: " + this.baseSalary +
+        return "Instructor Id: " + super.instructorId +
+                ". | Part time | -> " +
+                " Name: " + super.fullName +
+                " - Username: " + super.username +
+                " - Base salary: " + super.baseSalary +
                 " - Active hrs month: " + this.activeHoursPerMonth +
                 " - Monthly salary: " + String.format("%,.1f", salaryCalculation());
     }

@@ -119,14 +119,14 @@ public class University {
 
     public String createNewSubject(String subjectName, int instructorIndex) {
         if (checkIfSubjectExists(subjectName) &&
-                getInstructorByIndex(instructorIndex).getBaseSalary() != null) {
+                getInstructorByIndex(instructorIndex).getInstructorId() != null) {
 
             Subject newSubject = new Subject(subjectName, getInstructorByIndex(instructorIndex));
             this.subjectList.add(newSubject);
 
             return "New subject " + "'" + subjectName + "'" + " successfully created";
         }
-        return "Check the given information for create a new subject";
+        return "The subject already exists, or the id is incorrect";
     }
 
     public String addSubjectStudentByIndex(int subjectIndex, int studentIndex) {
@@ -137,5 +137,36 @@ public class University {
 
         }
         return "Check the subject or student id";
+    }
+
+    public String getSubjectDetails(int subjectIndex) {
+        Subject subject = getSubjectByIndex(subjectIndex);
+
+        String instructorUsername = subject.getInstructorUsername();
+        String subjectStudents = subject.getSubjectStudents();
+
+        return "Instructor: " + instructorUsername + "\n" +
+                "Students: ⤵" + "\n" + subjectStudents;
+    }
+
+    public String getStudentEnrolledSubjects(int studentIndex) {
+        Student student = getStudentByIndex(studentIndex);
+
+        List<Subject> subjectList =
+                this.subjectList.stream().
+                        filter(subject -> subject.isEnrolledInSubject(student)).collect(Collectors.toList());
+
+        String subjectsByStudentId = "";
+
+        for (Subject subject : subjectList) {
+            subjectsByStudentId += " - " + subject.getSubjectName();
+        }
+
+        if (subjectsByStudentId.length() == 0) {
+            subjectsByStudentId = student.getUsername() + " doesn't have subjects enrolled";
+            return subjectsByStudentId;
+        } else {
+            return "Subjects enrolled for " + student.getUsername() + ": " + subjectsByStudentId;
+        }
     }
 }

@@ -85,6 +85,10 @@ public class Main {
         return ">>>>>>>>> Coming back to principal menu <<<<<<<<<";
     }
 
+    private static String errorMessage() {
+        return "\n       ❗       Error occurred       ❗       ";
+    }
+
     private static void displayInstructorsData(University university) {
         System.out.println("**** \uD83D\uDC69\u200D\uD83C\uDFEB **** Instructor's data **** \uD83D\uDC68\u200D\uD83C\uDFEB ****\n");
 
@@ -120,30 +124,106 @@ public class Main {
             System.out.println(noElementsMessage());
         }
 
-        int subjectId = 0;
-
         for (int i = 0; i < university.getSubjectListSize(); i++) {
-            System.out.println((++subjectId) + ". " + university.getSubjectByIndex(i));
+            System.out.println(university.getSubjectByIndex(i));
         }
+
+        getSubjectDetail(university);
+    }
+
+    private static void getSubjectDetail(University university) {
+        Scanner scan = new Scanner(System.in);
+        System.out.println("\n❊ \uD83D\uDC40 ❊ If you want to check details of any subject ❊ \uD83D\uDC40 ❊\t");
+        System.out.println("           type the id below, or type 0 to exit \n");
+
+        try {
+            int subjectIndex = scan.nextInt();
+            if (subjectIndex > 0) {
+                System.out.println(university.getSubjectDetails(subjectIndex - 1));
+            }
+        } catch (Exception ex) {
+            System.out.println(errorMessage());
+        }
+
+        System.out.println("\n" + comingBackMessage());
     }
 
     private static void searchSubjectsByStudentId(University university) {
-        System.out.println("**** \uD83E\uDD13 **** Subjects in which student is enrolled **** \uD83E\uDD13 ****\t");
+        Scanner scan = new Scanner(System.in);
+        System.out.println("**** \uD83E\uDD13 **** Subjects in which student is enrolled **** \uD83E\uDD13 ****\n");
+
+        try {
+            System.out.println("Type student id");
+            int studentId = scan.nextInt();
+
+            System.out.println(university.getStudentEnrolledSubjects(studentId - 1));
+
+        } catch (Exception ex) {
+            System.out.println(errorMessage());
+        }
+
         System.out.println("\n" + comingBackMessage());
     }
 
     private static void triggerCreateNewStudent(University university) {
-        System.out.println("**** \uD83D\uDE00 **** Section for create new student **** \uD83D\uDE00 ****\t");
+        Scanner scan = new Scanner(System.in);
+        System.out.println("**** \uD83D\uDE00 **** Section for create new student **** \uD83D\uDE00 ****\n");
+
+        try {
+            System.out.println("Type full name");
+            String fullName = scan.nextLine();
+
+            System.out.println("Type username");
+            String username = scan.nextLine();
+
+            System.out.println("Type student age");
+            int studentAge = scan.nextInt();
+
+            System.out.println("\n" + university.createNewStudent(fullName, username, studentAge));
+        } catch (Exception ex) {
+            System.out.println(errorMessage());
+        }
+
         System.out.println("\n" + comingBackMessage());
     }
 
     private static void triggerCreateNewSubject(University university) {
-        System.out.println("**** \uD83D\uDCDA **** Section for create new subject **** \uD83D\uDCDA ****\t");
+        Scanner scan = new Scanner(System.in);
+        System.out.println("**** \uD83D\uDCDA **** Section for create new subject **** \uD83D\uDCDA ****\n");
+
+        int instructorIndex = 0;
+
+        try {
+            System.out.println("Type subject name");
+            String subjectName = scan.nextLine();
+
+            System.out.println("Type instructor id for the subject");
+            instructorIndex = scan.nextInt();
+
+            System.out.println("\n" + university.createNewSubject(subjectName, (instructorIndex - 1)));
+        } catch (Exception ex) {
+            System.out.println(errorMessage());
+        }
+
         System.out.println("\n" + comingBackMessage());
     }
 
     private static void triggerAddSubjectStudentByIndex(University university) {
-        System.out.println("**** ✏ **** Section for add student to a subject **** ✏ ****\t");
+        Scanner scan = new Scanner(System.in);
+        System.out.println("**** ✏ **** Section for add student to a subject **** ✏ ****\n");
+
+        try {
+            System.out.println("Type subject id");
+            int subjectIndex = scan.nextInt();
+
+            System.out.println("Type student id");
+            int studentIndex = scan.nextInt();
+
+            System.out.println("\n" + university.addSubjectStudentByIndex((subjectIndex - 1), (studentIndex - 1)));
+        } catch (Exception ex) {
+            System.out.println(errorMessage());
+        }
+
         System.out.println("\n" + comingBackMessage());
     }
 

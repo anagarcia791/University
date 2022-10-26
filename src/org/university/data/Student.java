@@ -23,6 +23,7 @@ public class Student extends UniversityMember {
 
     @Override
     public String toString() {
-        return "Id: " + this.studentId + " - Name: " + this.fullName + " - Username: " + this.username + " - Age: " + this.studentAge;
+        return "Student Id: " + this.studentId + " - Name: " + super.fullName +
+                " - Username: " + super.username + " - Age: " + this.studentAge;
     }
 }
