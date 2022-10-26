@@ -30,6 +30,24 @@ public class Subject {
         return subjectName;
     }
 
+    public String getInstructorUsername() {
+        return this.subjectInstructor.getUsername();
+    }
+
+    public String getSubjectStudents() {
+        String subjectStudents = "";
+
+        if (this.subjectStudentList.size() == 0) {
+            subjectStudents = "No students enrolled";
+        }
+
+        for (Student student : this.subjectStudentList) {
+            subjectStudents += "- Id: " + student.getStudentId() + " Username: " + student.getUsername();
+        }
+
+        return subjectStudents;
+    }
+
     public String addSubjectStudent(Student student) {
         if (!this.subjectStudentList.contains(student)) {
             this.subjectStudentList.add(student);
@@ -38,13 +56,13 @@ public class Subject {
         return "Student with id " + student.getStudentId() + " is already enrolled in " + this.subjectName + " subject";
     }
 
-    public boolean isEnrolledInSubject(Student student){
+    public boolean isEnrolledInSubject(Student student) {
         return this.subjectStudentList.contains(student);
     }
 
     @Override
     public String toString() {
         return "Subject Id: " + this.subjectId + " - Subject: " + this.subjectName +
-                " - Classroom: " + this.classroom + " - Instructor: " + subjectInstructor.getUsername();
+                " - Classroom: " + this.classroom;
     }
 }

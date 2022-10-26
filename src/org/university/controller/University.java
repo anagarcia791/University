@@ -139,6 +139,16 @@ public class University {
         return "Check the subject or student id";
     }
 
+    public String getSubjectDetails(int subjectIndex) {
+        Subject subject = getSubjectByIndex(subjectIndex);
+
+        String instructorUsername = subject.getInstructorUsername();
+        String subjectStudents = subject.getSubjectStudents();
+
+        return "Instructor: " + instructorUsername + "\n" +
+                "Students: ⤵" + "\n" + subjectStudents;
+    }
+
     public String getStudentEnrolledSubjects(int studentIndex) {
         Student student = getStudentByIndex(studentIndex);
 
@@ -152,11 +162,11 @@ public class University {
             subjectsByStudentId += " - " + subject.getSubjectName();
         }
 
-        if(subjectsByStudentId.length() == 0){
-            subjectsByStudentId = "No subjects enrolled";
+        if (subjectsByStudentId.length() == 0) {
+            subjectsByStudentId = student.getUsername() + " doesn't have subjects enrolled";
             return subjectsByStudentId;
-        }else{
-            return "Subjects enrolled: " + subjectsByStudentId;
+        } else {
+            return "Subjects enrolled for " + student.getUsername() + ": " + subjectsByStudentId;
         }
     }
 }

@@ -127,6 +127,25 @@ public class Main {
         for (int i = 0; i < university.getSubjectListSize(); i++) {
             System.out.println(university.getSubjectByIndex(i));
         }
+
+        getSubjectDetail(university);
+    }
+
+    private static void getSubjectDetail(University university) {
+        Scanner scan = new Scanner(System.in);
+        System.out.println("\n❊ \uD83D\uDC40 ❊ If you want to check details of any subject ❊ \uD83D\uDC40 ❊\t");
+        System.out.println("           type the id below, or type 0 to exit \n");
+
+        try {
+            int subjectIndex = scan.nextInt();
+            if (subjectIndex > 0) {
+                System.out.println(university.getSubjectDetails(subjectIndex - 1));
+            }
+        } catch (Exception ex) {
+            System.out.println(errorMessage());
+        }
+
+        System.out.println("\n" + comingBackMessage());
     }
 
     private static void searchSubjectsByStudentId(University university) {
@@ -137,7 +156,7 @@ public class Main {
             System.out.println("Type student id");
             int studentId = scan.nextInt();
 
-            System.out.println(university.getStudentEnrolledSubjects(studentId-1));
+            System.out.println(university.getStudentEnrolledSubjects(studentId - 1));
 
         } catch (Exception ex) {
             System.out.println(errorMessage());
