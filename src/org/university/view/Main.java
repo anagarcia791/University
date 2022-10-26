@@ -154,9 +154,9 @@ public class Main {
 
         try {
             System.out.println("Type student id");
-            int studentId = scan.nextInt();
+            int studentIndex = scan.nextInt();
 
-            System.out.println(university.getStudentEnrolledSubjects(studentId - 1));
+            System.out.println(university.getStudentEnrolledSubjects(studentIndex - 1));
 
         } catch (Exception ex) {
             System.out.println(errorMessage());
@@ -191,14 +191,12 @@ public class Main {
         Scanner scan = new Scanner(System.in);
         System.out.println("**** \uD83D\uDCDA **** Section for create new subject **** \uD83D\uDCDA ****\n");
 
-        int instructorIndex = 0;
-
         try {
             System.out.println("Type subject name");
             String subjectName = scan.nextLine();
 
             System.out.println("Type instructor id for the subject");
-            instructorIndex = scan.nextInt();
+            int instructorIndex = scan.nextInt();
 
             System.out.println("\n" + university.createNewSubject(subjectName, (instructorIndex - 1)));
         } catch (Exception ex) {
