@@ -55,7 +55,7 @@ public class Subject {
         return "Student with id " + student.getStudentId() + " is already enrolled in " + this.subjectName + " subject";
     }
 
-    public boolean isEnrolledInSubject(Student student) {
+    public boolean studentIsEnrolledInSubject(Student student) {
         return this.subjectStudentList.contains(student);
     }
 

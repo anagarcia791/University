@@ -154,7 +154,7 @@ public class University {
 
         List<Subject> subjectList =
                 this.subjectList.stream().
-                        filter(subject -> subject.isEnrolledInSubject(student)).collect(Collectors.toList());
+                        filter(subject -> subject.studentIsEnrolledInSubject(student)).collect(Collectors.toList());
 
         String subjectsByStudentId = "";
 
