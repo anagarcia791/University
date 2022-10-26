@@ -9,7 +9,6 @@ public class Subject {
     private static Integer subjectIdCount = 0;
     private String subjectName;
     private String classroom;
-    private static Integer classroomInt = 0;
     private Instructor subjectInstructor;
     private List<Student> subjectStudentList;
 
@@ -20,7 +19,7 @@ public class Subject {
     public Subject(String subjectName, Instructor subjectInstructor) {
         this.subjectId = ++subjectIdCount;
         this.subjectName = subjectName;
-        this.classroom = "A-" + ++classroomInt;
+        this.classroom = "A-" + subjectIdCount;
         this.subjectInstructor = subjectInstructor;
         this.subjectStudentList = new ArrayList<>();
     }
@@ -42,7 +41,7 @@ public class Subject {
         }
 
         for (Student student : this.subjectStudentList) {
-            subjectStudents += "- Id: " + student.getStudentId() + " Username: " + student.getUsername();
+            subjectStudents += " - Id: " + student.getStudentId() + " Username: " + student.getUsername();
         }
 
         return subjectStudents;
