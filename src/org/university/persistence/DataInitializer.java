@@ -23,6 +23,7 @@ public class DataInitializer {
         university.createNewInstructor("Camilo Vargas", "c.vargas", 200.0, 5, 1);
         university.createNewInstructor("Paula Bula", "p.bula", 200.0, 7, 1);
         university.createNewInstructor("Enrique Giles", "e.giles", 200.0, 96, 2);
+        university.createNewInstructor("Angela Parrado", "a.parrado", 200.0, 105, 2);
     }
 
     private static void loadStudentIntoUniversity(University university) {
@@ -35,9 +36,9 @@ public class DataInitializer {
     }
 
     private static void loadSubjectsIntoUniversity(University university) {
-        university.createNewSubject("Microeconomics", 0);
-        university.createNewSubject("Macroeconomics", 2);
+        university.createNewSubject("Microeconomics", 3);
         university.createNewSubject("Econometrics", 0);
+        university.createNewSubject("Macroeconomics", 2);
         university.createNewSubject("History", 1);
     }
 

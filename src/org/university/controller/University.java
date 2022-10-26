@@ -138,4 +138,25 @@ public class University {
         }
         return "Check the subject or student id";
     }
+
+    public String getStudentEnrolledSubjects(int studentIndex) {
+        Student student = getStudentByIndex(studentIndex);
+
+        List<Subject> subjectList =
+                this.subjectList.stream().
+                        filter(subject -> subject.isEnrolledInSubject(student)).collect(Collectors.toList());
+
+        String subjectsByStudentId = "";
+
+        for (Subject subject : subjectList) {
+            subjectsByStudentId += " - " + subject.getSubjectName();
+        }
+
+        if(subjectsByStudentId.length() == 0){
+            subjectsByStudentId = "No subjects enrolled";
+            return subjectsByStudentId;
+        }else{
+            return "Subjects enrolled: " + subjectsByStudentId;
+        }
+    }
 }

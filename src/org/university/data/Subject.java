@@ -38,6 +38,10 @@ public class Subject {
         return "Student with id " + student.getStudentId() + " is already enrolled in " + this.subjectName + " subject";
     }
 
+    public boolean isEnrolledInSubject(Student student){
+        return this.subjectStudentList.contains(student);
+    }
+
     @Override
     public String toString() {
         return "Subject Id: " + this.subjectId + " - Subject: " + this.subjectName +

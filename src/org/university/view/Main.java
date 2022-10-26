@@ -130,7 +130,19 @@ public class Main {
     }
 
     private static void searchSubjectsByStudentId(University university) {
+        Scanner scan = new Scanner(System.in);
         System.out.println("**** \uD83E\uDD13 **** Subjects in which student is enrolled **** \uD83E\uDD13 ****\n");
+
+        try {
+            System.out.println("Type student id");
+            int studentId = scan.nextInt();
+
+            System.out.println(university.getStudentEnrolledSubjects(studentId-1));
+
+        } catch (Exception ex) {
+            System.out.println(errorMessage());
+        }
+
         System.out.println("\n" + comingBackMessage());
     }
 
@@ -160,12 +172,14 @@ public class Main {
         Scanner scan = new Scanner(System.in);
         System.out.println("**** \uD83D\uDCDA **** Section for create new subject **** \uD83D\uDCDA ****\n");
 
+        int instructorIndex = 0;
+
         try {
             System.out.println("Type subject name");
             String subjectName = scan.nextLine();
 
             System.out.println("Type instructor id for the subject");
-            int instructorIndex = scan.nextInt();
+            instructorIndex = scan.nextInt();
 
             System.out.println("\n" + university.createNewSubject(subjectName, (instructorIndex - 1)));
         } catch (Exception ex) {
