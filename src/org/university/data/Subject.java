@@ -37,17 +37,6 @@ public class Subject {
         return this.subjectInstructor.getUsername();
     }
 
-    public String addSubjectStudent(Student student) {
-        String studentAggregationResult = "";
-        if (!this.subjectStudentList.contains(student)) {
-            this.subjectStudentList.add(student);
-            studentAggregationResult = "Student with id " + student.getStudentId() + " added to " + this.subjectName;
-        } else {
-            studentAggregationResult = "Student with id " + student.getStudentId() + " is already enrolled in " + this.subjectName + " subject";
-        }
-        return studentAggregationResult;
-    }
-
     public String getSubjectStudents() {
         String subjectStudents = "";
 
@@ -64,6 +53,18 @@ public class Subject {
 
     public boolean studentIsEnrolledInSubject(Student student) {
         return this.subjectStudentList.contains(student);
+    }
+
+    public String addSubjectStudent(Student student) {
+        String studentAggregationResult =
+                "Student with id " + student.getStudentId() + " is already enrolled in " + this.subjectName + " subject";
+
+        if (!this.subjectStudentList.contains(student)) {
+            this.subjectStudentList.add(student);
+            studentAggregationResult = "Student with id " + student.getStudentId() + " added to " + this.subjectName;
+        }
+
+        return studentAggregationResult;
     }
 
     @Override

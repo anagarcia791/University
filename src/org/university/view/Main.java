@@ -171,10 +171,10 @@ public class Main {
 
         try {
             System.out.println("Type full name");
-            String fullName = scan.nextLine();
+            String fullName = scan.nextLine().trim();
 
             System.out.println("Type username");
-            String username = scan.nextLine();
+            String username = scan.nextLine().trim();
 
             System.out.println("Type student age");
             int studentAge = scan.nextInt();
@@ -193,7 +193,7 @@ public class Main {
 
         try {
             System.out.println("Type subject name");
-            String subjectName = scan.nextLine();
+            String subjectName = scan.nextLine().trim();
 
             System.out.println("Type instructor id for the subject");
             int instructorId = scan.nextInt();
