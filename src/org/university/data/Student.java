@@ -3,7 +3,7 @@ package org.university.data;
 public class Student extends UniversityMember {
     // attributes
     private Integer studentId;
-    private static Integer studentIdCount = 0;
+    private static Integer studentIdCount = 200;
     private Integer studentAge;
 
     // constructor
@@ -23,7 +23,7 @@ public class Student extends UniversityMember {
 
     @Override
     public String toString() {
-        return "Student Id: " + this.studentId + " - Name: " + super.fullName +
+        return "Student Id: " + this.studentId + ". - Name: " + super.fullName +
                 " - Username: " + super.username + " - Age: " + this.studentAge;
     }
 }
