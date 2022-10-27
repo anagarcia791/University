@@ -14,8 +14,6 @@ public class DataInitializer {
 
         loadStudentsIntoEachSubject(university);
 
-        loadUniversityMembersIntoUniversity(university);
-
         return university;
     }
 
@@ -36,37 +34,28 @@ public class DataInitializer {
     }
 
     private static void loadSubjectsIntoUniversity(University university) {
-        university.createNewSubject("Microeconomics", 3);
-        university.createNewSubject("Econometrics", 0);
-        university.createNewSubject("Macroeconomics", 2);
-        university.createNewSubject("History", 1);
+        university.createNewSubject("Microeconomics", 104);
+        university.createNewSubject("Econometrics", 101);
+        university.createNewSubject("Macroeconomics", 103);
+        university.createNewSubject("History", 102);
     }
 
     private static void loadStudentsIntoEachSubject(University university) {
-        university.addSubjectStudentByIndex(0, 0);
-        university.addSubjectStudentByIndex(0, 1);
-        university.addSubjectStudentByIndex(0, 2);
+        university.addSubjectStudentById(301, 201);
+        university.addSubjectStudentById(301, 202);
+        university.addSubjectStudentById(301, 203);
 
-        university.addSubjectStudentByIndex(1, 0);
-        university.addSubjectStudentByIndex(1, 1);
-        university.addSubjectStudentByIndex(1, 2);
+        university.addSubjectStudentById(302, 201);
+        university.addSubjectStudentById(302, 202);
+        university.addSubjectStudentById(302, 203);
 
-        university.addSubjectStudentByIndex(2, 3);
-        university.addSubjectStudentByIndex(2, 4);
-        university.addSubjectStudentByIndex(2, 5);
+        university.addSubjectStudentById(303, 204);
+        university.addSubjectStudentById(303, 205);
+        university.addSubjectStudentById(303, 206);
 
-        university.addSubjectStudentByIndex(3, 3);
-        university.addSubjectStudentByIndex(3, 4);
-        university.addSubjectStudentByIndex(3, 5);
+        university.addSubjectStudentById(304, 204);
+        university.addSubjectStudentById(304, 205);
+        university.addSubjectStudentById(304, 206);
     }
 
-    private static void loadUniversityMembersIntoUniversity(University university) {
-        for (int i = 0; i < university.getInstructorListSize(); i++) {
-            university.addUniversityMember(university.getInstructorByIndex(i));
-        }
-
-        for (int i = 0; i < university.getStudentListSize(); i++) {
-            university.addUniversityMember(university.getStudentByIndex(i));
-        }
-    }
 }

@@ -6,7 +6,7 @@ import java.util.List;
 public class Subject {
     // attributes
     private Integer subjectId;
-    private static Integer subjectIdCount = 0;
+    private static Integer count = 0;
     private String subjectName;
     private String classroom;
     private Instructor subjectInstructor;
@@ -17,14 +17,18 @@ public class Subject {
     }
 
     public Subject(String subjectName, Instructor subjectInstructor) {
-        this.subjectId = ++subjectIdCount;
+        this.subjectId = ++count + 300;
         this.subjectName = subjectName;
-        this.classroom = "A-" + subjectIdCount;
+        this.classroom = "A-" + count;
         this.subjectInstructor = subjectInstructor;
         this.subjectStudentList = new ArrayList<>();
     }
 
     // methods
+    public Integer getSubjectId() {
+        return subjectId;
+    }
+
     public String getSubjectName() {
         return subjectName;
     }
@@ -33,11 +37,22 @@ public class Subject {
         return this.subjectInstructor.getUsername();
     }
 
+    public String addSubjectStudent(Student student) {
+        String studentAggregationResult = "";
+        if (!this.subjectStudentList.contains(student)) {
+            this.subjectStudentList.add(student);
+            studentAggregationResult = "Student with id " + student.getStudentId() + " added to " + this.subjectName;
+        } else {
+            studentAggregationResult = "Student with id " + student.getStudentId() + " is already enrolled in " + this.subjectName + " subject";
+        }
+        return studentAggregationResult;
+    }
+
     public String getSubjectStudents() {
         String subjectStudents = "";
 
         if (this.subjectStudentList.size() == 0) {
-            subjectStudents = "No students enrolled";
+            subjectStudents = "No students enrolled in " + this.subjectName;
         }
 
         for (Student student : this.subjectStudentList) {
@@ -47,21 +62,13 @@ public class Subject {
         return subjectStudents;
     }
 
-    public String addSubjectStudent(Student student) {
-        if (!this.subjectStudentList.contains(student)) {
-            this.subjectStudentList.add(student);
-            return "Student with id " + student.getStudentId() + " added to " + this.subjectName;
-        }
-        return "Student with id " + student.getStudentId() + " is already enrolled in " + this.subjectName + " subject";
-    }
-
     public boolean studentIsEnrolledInSubject(Student student) {
         return this.subjectStudentList.contains(student);
     }
 
     @Override
     public String toString() {
-        return "Subject Id: " + this.subjectId + " - Subject: " + this.subjectName +
+        return "Subject Id: " + this.subjectId + ". - Subject: " + this.subjectName +
                 " - Classroom: " + this.classroom;
     }
 }

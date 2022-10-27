@@ -137,9 +137,9 @@ public class Main {
         System.out.println("           type the id below, or type 0 to exit \n");
 
         try {
-            int subjectIndex = scan.nextInt();
-            if (subjectIndex > 0) {
-                System.out.println(university.getSubjectDetails(subjectIndex - 1));
+            int subjectId = scan.nextInt();
+            if (subjectId > 0) {
+                System.out.println(university.getSubjectDetails(subjectId));
             }
         } catch (Exception ex) {
             System.out.println(errorMessage());
@@ -154,9 +154,9 @@ public class Main {
 
         try {
             System.out.println("Type student id");
-            int studentIndex = scan.nextInt();
+            int studentId = scan.nextInt();
 
-            System.out.println(university.getStudentEnrolledSubjects(studentIndex - 1));
+            System.out.println(university.getStudentEnrolledSubjects(studentId));
 
         } catch (Exception ex) {
             System.out.println(errorMessage());
@@ -196,9 +196,9 @@ public class Main {
             String subjectName = scan.nextLine();
 
             System.out.println("Type instructor id for the subject");
-            int instructorIndex = scan.nextInt();
+            int instructorId = scan.nextInt();
 
-            System.out.println("\n" + university.createNewSubject(subjectName, (instructorIndex - 1)));
+            System.out.println("\n" + university.createNewSubject(subjectName, instructorId));
         } catch (Exception ex) {
             System.out.println(errorMessage());
         }
@@ -212,12 +212,12 @@ public class Main {
 
         try {
             System.out.println("Type subject id");
-            int subjectIndex = scan.nextInt();
+            int subjectId = scan.nextInt();
 
             System.out.println("Type student id");
-            int studentIndex = scan.nextInt();
+            int studentId = scan.nextInt();
 
-            System.out.println("\n" + university.addSubjectStudentByIndex((subjectIndex - 1), (studentIndex - 1)));
+            System.out.println("\n" + university.addSubjectStudentById(subjectId, studentId));
         } catch (Exception ex) {
             System.out.println(errorMessage());
         }
