@@ -6,6 +6,11 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
+/**
+ * This class initialize the attributes needed for
+ * organize structures of instructors, students and
+ * subjects of the university, and have a way to interact with them.
+ */
 public class University {
     // attributes
     private final String universityName;
@@ -52,6 +57,13 @@ public class University {
         return this.subjectList.get(index);
     }
 
+    /**
+     * This method return an Instructor object,
+     * filtered by its id.
+     *
+     * @param instructorId instructor id for filter
+     * @return Instructor object
+     */
     public Instructor getInstructorById(int instructorId) {
         List<Instructor> instructorList =
                 this.instructorList.stream().
@@ -64,6 +76,13 @@ public class University {
         }
     }
 
+    /**
+     * This method return a Student object,
+     * filtered by its id.
+     *
+     * @param studentId student id for filter
+     * @return Student object
+     */
     public Student getStudentById(int studentId) {
         List<Student> studentList =
                 this.studentList.stream().
@@ -76,6 +95,13 @@ public class University {
         }
     }
 
+    /**
+     * This method return a Subject object,
+     * filtered by its id.
+     *
+     * @param subjectId subject id for filter
+     * @return Subject object
+     */
     public Subject getSubjectById(int subjectId) {
         List<Subject> subjectList =
                 this.subjectList.stream().
@@ -88,27 +114,63 @@ public class University {
         }
     }
 
-    public void addUniversityMember(UniversityMember universityMember) {
-        this.universityMemberList.add(universityMember);
-    }
-
+    /**
+     * This method return a boolean, after
+     * check if the username match with the
+     * username of any university member.
+     *
+     * @param username username for evaluation
+     * @return a boolean if username has a match in university members list
+     */
     public boolean checkIfUsernameExists(String username) {
         List<UniversityMember> memberList =
                 this.universityMemberList.stream().
-                        filter(member -> username.equals(member.getUsername())).collect(Collectors.toList());
+                        filter(member -> username.equalsIgnoreCase(member.getUsername())).collect(Collectors.toList());
 
         return memberList.size() == 0;
     }
 
+    /**
+     * This method return a boolean, after
+     * check if the subject name match with the
+     * 'subjectName' of any subject.
+     *
+     * @param subjectName subject name for evaluation
+     * @return a boolean if subject name has a match in subject list
+     */
     public boolean checkIfSubjectExists(String subjectName) {
         List<Subject> subjectList =
                 this.subjectList.stream().
-                        filter(subject -> subjectName.equals(subject.getSubjectName())).collect(Collectors.toList());
+                        filter(subject -> subjectName.equalsIgnoreCase(subject.getSubjectName())).collect(Collectors.toList());
 
         return subjectList.size() == 0;
     }
 
+    /**
+     * This method adds members to university
+     * member list.
+     *
+     * @param universityMember university member for addition in the list
+     */
+    public void addUniversityMember(UniversityMember universityMember) {
+        this.universityMemberList.add(universityMember);
+    }
+
+    /**
+     * This method create a new Instructor, either
+     * full time instructor or part-time instructor.
+     * Here is validated if the username already exists.
+     *
+     * @param fullName full name to create new instructor
+     * @param username username to create new instructor
+     * @param baseSalary base salary to create new instructor
+     * @param experienceOrActiveHrs here you can write experience years or active hrs monthly to create new instructor
+     * @param instructorType instructor type has 2 possible options: 1. full time instructor or 2. part-time instructor
+     * @return a String with message of: success or failed instructor creation
+     */
     public String createNewInstructor(String fullName, String username, Double baseSalary, Integer experienceOrActiveHrs, int instructorType) {
+        String newInstructorResult = "Username already exists";
+
         if (checkIfUsernameExists(username)) {
             Instructor newInstructor;
             switch (instructorType) {
@@ -116,43 +178,149 @@ public class University {
                     newInstructor = new FullTimeInstructor(fullName, username, baseSalary, experienceOrActiveHrs);
                     this.instructorList.add(newInstructor);
                     addUniversityMember(newInstructor);
-                    return fullName + " added as new instructor";
+                    newInstructorResult = fullName + " added as new full time instructor";
+                    break;
                 case 2:
                     newInstructor = new PartTimeInstructor(fullName, username, baseSalary, experienceOrActiveHrs);
                     this.instructorList.add(newInstructor);
                     addUniversityMember(newInstructor);
-                    return fullName + " added as new instructor";
+                    newInstructorResult = fullName + " added as new part time instructor";
+                    break;
                 default:
-                    return "Check the given information for create a new instructor";
+                    newInstructorResult = "Check the given information for create a new instructor";
+                    break;
             }
         }
 
-        return "Username already exists";
+        return newInstructorResult;
     }
 
+    /**
+     * This method create a new Student.
+     * Here is validated if the username already exists.
+     *
+     * @param fullName full name to create new student
+     * @param username username to create new student
+     * @param studentAge student age to create new student
+     * @return a String with message of: success or failed student creation
+     */
     public String createNewStudent(String fullName, String username, Integer studentAge) {
+        String newStudentResult = "Username already exists";
+
         if (checkIfUsernameExists(username)) {
             Student newStudent = new Student(fullName, username, studentAge);
             this.studentList.add(newStudent);
             addUniversityMember(newStudent);
-            return fullName + " added as new student";
+            newStudentResult = fullName + " added as new student";
         }
-        return "Username already exists";
+
+        return newStudentResult;
     }
 
+    /**
+     * This method create a new Subject.
+     * Here is validated if the subject already exists,
+     * and if the instructor id is correct.
+     *
+     * @param subjectName subject name to create new subject
+     * @param instructorId id of one instructor already created responsible for the new subject
+     * @return a String with message of: success or failed subject creation
+     */
     public String createNewSubject(String subjectName, int instructorId) {
+        String newSubjectResult = "The subject already exists, or the id is incorrect";
+
         Instructor instructor = getInstructorById(instructorId);
 
-        if (checkIfSubjectExists(subjectName.trim()) && instructor.getInstructorId() != null) {
-            Subject newSubject = new Subject(subjectName.trim(), instructor);
+        if (checkIfSubjectExists(subjectName) && instructor.getInstructorId() != null) {
+            Subject newSubject = new Subject(subjectName, instructor);
             this.subjectList.add(newSubject);
 
-            return "New subject " + "'" + subjectName + "'" + " successfully created";
-        } else {
-            return "The subject already exists, or the id is incorrect";
+            newSubjectResult = "New subject " + "'" + subjectName + "'" + " successfully created";
         }
+
+        return newSubjectResult;
     }
 
+    /**
+     * This method return additional information for specific subject,
+     * like instructor username, and id and username of students enrolled.
+     *
+     * @param subjectId id of subject to look up for information
+     * @return a String with the subject details or error in the search
+     */
+    public String getSubjectDetails(int subjectId) {
+        Subject subject = getSubjectById(subjectId);
+
+        String subjectsDetail = "The id is incorrect";
+
+        if (subject.getSubjectId() != null) {
+            String instructorUsername = subject.getInstructorUsername();
+            String subjectStudents = subject.getSubjectStudents();
+
+            subjectsDetail =
+                    "Instructor: " + instructorUsername + "\n" + "Students: ⤵" + "\n" + subjectStudents;
+        }
+
+        return subjectsDetail;
+    }
+
+    /**
+     * This method check all available subjects, and look up
+     * for those where the student list of the subject includes
+     * a student.
+     *
+     * @param student a Student object for evaluation
+     * @return a String empty or with the subjects where the student is included
+     */
+    public String getStudentEnrolledSubjectsList(Student student) {
+        String subjectsByStudent = "";
+
+        List<Subject> subjectList =
+                this.subjectList.stream().
+                        filter(subject -> subject.studentIsEnrolledInSubject(student)).collect(Collectors.toList());
+
+        for (Subject subject : subjectList) {
+            subjectsByStudent += " - " + subject.getSubjectName();
+        }
+
+        return subjectsByStudent;
+    }
+
+    /**
+     * This method uses getStudentEnrolledSubjectsList() method
+     * for modularize the output message, where the student list of
+     * a subject includes a student.
+     *
+     * @param studentId student id for search the complete object
+     * @return a String with the subjects enrolled by the student or error in the search
+     */
+    public String getStudentEnrolledSubjects(int studentId) {
+        Student student = getStudentById(studentId);
+
+        String subjectsByStudentId = "The id is incorrect";
+
+        if (student.getStudentId() != null) {
+            subjectsByStudentId = getStudentEnrolledSubjectsList(student);
+
+            if (subjectsByStudentId.length() == 0) {
+                subjectsByStudentId = student.getUsername() + " doesn't have subjects enrolled";
+            } else {
+                subjectsByStudentId = "Subjects enrolled for " + student.getUsername() + ": " + subjectsByStudentId;
+            }
+
+        }
+
+        return subjectsByStudentId;
+    }
+
+    /**
+     * This method trigger the addition of a student in a subject,
+     * after confirm the ids corresponds to existing objects.
+     *
+     * @param subjectId subject id for search the complete object
+     * @param studentId student id for search the complete object
+     * @return a String with message of: success or failed addition process
+     */
     public String addSubjectStudentById(int subjectId, int studentId) {
         Subject subject = getSubjectById(subjectId);
         Student student = getStudentById(studentId);
@@ -161,37 +329,6 @@ public class University {
             return subject.addSubjectStudent(student);
         } else {
             return "Check the subject or student id";
-        }
-    }
-
-    public String getSubjectDetails(int subjectId) {
-        Subject subject = getSubjectById(subjectId);
-
-        String instructorUsername = subject.getInstructorUsername();
-        String subjectStudents = subject.getSubjectStudents();
-
-        return "Instructor: " + instructorUsername + "\n" +
-                "Students: ⤵" + "\n" + subjectStudents;
-    }
-
-    public String getStudentEnrolledSubjects(int studentId) {
-        Student student = getStudentById(studentId);
-
-        List<Subject> subjectList =
-                this.subjectList.stream().
-                        filter(subject -> subject.studentIsEnrolledInSubject(student)).collect(Collectors.toList());
-
-        String subjectsByStudentId = "";
-
-        for (Subject subject : subjectList) {
-            subjectsByStudentId += " - " + subject.getSubjectName();
-        }
-
-        if (subjectsByStudentId.length() == 0) {
-            subjectsByStudentId = student.getUsername() + " doesn't have subjects enrolled";
-            return subjectsByStudentId;
-        } else {
-            return "Subjects enrolled for " + student.getUsername() + ": " + subjectsByStudentId;
         }
     }
 }

@@ -89,6 +89,11 @@ public class Main {
         return "\n       ❗       Error occurred       ❗       ";
     }
 
+    /**
+     * This method get all instructor data to display it.
+     *
+     * @param university University object for look up information
+     */
     private static void displayInstructorsData(University university) {
         System.out.println("**** \uD83D\uDC69\u200D\uD83C\uDFEB **** Instructor's data **** \uD83D\uDC68\u200D\uD83C\uDFEB ****\n");
 
@@ -103,6 +108,11 @@ public class Main {
         System.out.println("\n" + comingBackMessage());
     }
 
+    /**
+     * This method get all students data to display it.
+     *
+     * @param university University object for look up information
+     */
     private static void displayStudentsData(University university) {
         System.out.println("**** \uD83D\uDC69\u200D\uD83C\uDF93 **** Student's data **** \uD83D\uDC68\u200D\uD83C\uDF93 ****\n");
 
@@ -117,6 +127,11 @@ public class Main {
         System.out.println("\n" + comingBackMessage());
     }
 
+    /**
+     * This method get all subjects data to display it.
+     *
+     * @param university University object for look up information
+     */
     private static void displaySubjectsData(University university) {
         System.out.println("**** ✍ **** University's subjects **** ✍ ****\n");
 
@@ -131,6 +146,11 @@ public class Main {
         getSubjectDetail(university);
     }
 
+    /**
+     * This method get additional information for a subject.
+     *
+     * @param university University object for look up information
+     */
     private static void getSubjectDetail(University university) {
         Scanner scan = new Scanner(System.in);
         System.out.println("\n❊ \uD83D\uDC40 ❊ If you want to check details of any subject ❊ \uD83D\uDC40 ❊\t");
@@ -148,6 +168,11 @@ public class Main {
         System.out.println("\n" + comingBackMessage());
     }
 
+    /**
+     * This method get the subjects enrolled by student id.
+     *
+     * @param university University object for look up information
+     */
     private static void searchSubjectsByStudentId(University university) {
         Scanner scan = new Scanner(System.in);
         System.out.println("**** \uD83E\uDD13 **** Subjects in which student is enrolled **** \uD83E\uDD13 ****\n");
@@ -165,16 +190,21 @@ public class Main {
         System.out.println("\n" + comingBackMessage());
     }
 
+    /**
+     * This method triggers the creation of new student.
+     *
+     * @param university University object for look up information
+     */
     private static void triggerCreateNewStudent(University university) {
         Scanner scan = new Scanner(System.in);
         System.out.println("**** \uD83D\uDE00 **** Section for create new student **** \uD83D\uDE00 ****\n");
 
         try {
             System.out.println("Type full name");
-            String fullName = scan.nextLine();
+            String fullName = scan.nextLine().trim();
 
             System.out.println("Type username");
-            String username = scan.nextLine();
+            String username = scan.nextLine().trim();
 
             System.out.println("Type student age");
             int studentAge = scan.nextInt();
@@ -187,13 +217,18 @@ public class Main {
         System.out.println("\n" + comingBackMessage());
     }
 
+    /**
+     * This method triggers the creation of new subject.
+     *
+     * @param university University object for look up information
+     */
     private static void triggerCreateNewSubject(University university) {
         Scanner scan = new Scanner(System.in);
         System.out.println("**** \uD83D\uDCDA **** Section for create new subject **** \uD83D\uDCDA ****\n");
 
         try {
             System.out.println("Type subject name");
-            String subjectName = scan.nextLine();
+            String subjectName = scan.nextLine().trim();
 
             System.out.println("Type instructor id for the subject");
             int instructorId = scan.nextInt();
@@ -206,6 +241,11 @@ public class Main {
         System.out.println("\n" + comingBackMessage());
     }
 
+    /**
+     * This method triggers the addition of student in subject student list.
+     *
+     * @param university University object for look up information
+     */
     private static void triggerAddSubjectStudentByIndex(University university) {
         Scanner scan = new Scanner(System.in);
         System.out.println("**** ✏ **** Section for add student to a subject **** ✏ ****\n");

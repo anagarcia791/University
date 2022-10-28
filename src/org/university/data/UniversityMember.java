@@ -1,5 +1,10 @@
 package org.university.data;
 
+/**
+ * This class initialize the attributes needed for
+ * create a new university member. This means, this class
+ * includes all students and instructors of the institution.
+ */
 public class UniversityMember {
     // attributes
     protected String fullName;

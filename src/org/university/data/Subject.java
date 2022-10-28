@@ -3,6 +3,10 @@ package org.university.data;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * This class initialize the attributes needed for
+ * create a new university subject.
+ */
 public class Subject {
     // attributes
     private Integer subjectId;
@@ -17,7 +21,7 @@ public class Subject {
     }
 
     public Subject(String subjectName, Instructor subjectInstructor) {
-        this.subjectId = ++count + 300;
+        this.subjectId = 300 + (++count);
         this.subjectName = subjectName;
         this.classroom = "A-" + count;
         this.subjectInstructor = subjectInstructor;
@@ -37,17 +41,13 @@ public class Subject {
         return this.subjectInstructor.getUsername();
     }
 
-    public String addSubjectStudent(Student student) {
-        String studentAggregationResult = "";
-        if (!this.subjectStudentList.contains(student)) {
-            this.subjectStudentList.add(student);
-            studentAggregationResult = "Student with id " + student.getStudentId() + " added to " + this.subjectName;
-        } else {
-            studentAggregationResult = "Student with id " + student.getStudentId() + " is already enrolled in " + this.subjectName + " subject";
-        }
-        return studentAggregationResult;
-    }
-
+    /**
+     * This method return students enrolled in a specific subject,
+     * it checks the subject student list to give id and username
+     * for each one in the list.
+     *
+     * @return a String with the students enrolled in the subject
+     */
     public String getSubjectStudents() {
         String subjectStudents = "";
 
@@ -62,8 +62,34 @@ public class Subject {
         return subjectStudents;
     }
 
+    /**
+     * This method return boolean after evaluation of
+     * student containment inside list of students.
+     *
+     * @param student a Student object for evaluation
+     * @return boolean according containment of the student inside students list of subject.
+     */
     public boolean studentIsEnrolledInSubject(Student student) {
         return this.subjectStudentList.contains(student);
+    }
+
+    /**
+     * This method return a message according if the student
+     * is already enrolled in subject or is just added.
+     *
+     * @param student a Student object for aggregate it to a subject
+     * @return a String with message of: success or failed aggregation process
+     */
+    public String addSubjectStudent(Student student) {
+        String studentAggregationResult =
+                "Student with id " + student.getStudentId() + " is already enrolled in " + this.subjectName + " subject";
+
+        if (!this.subjectStudentList.contains(student)) {
+            this.subjectStudentList.add(student);
+            studentAggregationResult = "Student with id " + student.getStudentId() + " added to " + this.subjectName;
+        }
+
+        return studentAggregationResult;
     }
 
     @Override

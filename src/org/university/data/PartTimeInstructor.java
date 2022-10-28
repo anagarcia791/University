@@ -1,5 +1,10 @@
 package org.university.data;
 
+/**
+ * This class initialize the attributes needed for
+ * create a new university part-time instructor. Furthermore,
+ * it's extending the abstract Instructor class.
+ */
 public class PartTimeInstructor extends Instructor {
     // attributes
     private final Integer activeHoursPerMonth;
@@ -11,6 +16,12 @@ public class PartTimeInstructor extends Instructor {
     }
 
     // methods
+    /**
+     * This method return the monthly salary, after
+     * taking into account the total monthly hrs worked.
+     *
+     * @return a double calculated with base salary and active hrs per month
+     */
     public double salaryCalculation() {
         return ((super.baseSalary / 192) * (this.activeHoursPerMonth));
     }
