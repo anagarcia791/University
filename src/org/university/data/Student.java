@@ -1,5 +1,10 @@
 package org.university.data;
 
+/**
+ * This class initialize the attributes needed for
+ * create a new university student. Furthermore, it's
+ * extending the UniversityMember class.
+ */
 public class Student extends UniversityMember {
     // attributes
     private Integer studentId;

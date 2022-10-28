@@ -1,5 +1,10 @@
 package org.university.data;
 
+/**
+ * This Abstract class initialize the attributes needed for
+ * create a new university instructor. Furthermore, it's
+ * extending the UniversityMember class.
+ */
 public abstract class Instructor extends UniversityMember {
     // attributes
     protected Integer instructorId;

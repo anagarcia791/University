@@ -1,5 +1,10 @@
 package org.university.data;
 
+/**
+ * This class initialize the attributes needed for
+ * create a new university full time instructor. Furthermore,
+ * it's extending the abstract Instructor class.
+ */
 public class FullTimeInstructor extends Instructor {
     // attributes
     private Integer experienceYears;
@@ -14,6 +19,12 @@ public class FullTimeInstructor extends Instructor {
     }
 
     // methods
+    /**
+     * This method return the monthly salary, after
+     * taking into account the total experience years of instructor.
+     *
+     * @return a double calculated with base salary and experience years
+     */
     public double salaryCalculation() {
         return (super.baseSalary * (this.experienceYears * 1.1));
     }
