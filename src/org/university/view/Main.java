@@ -2,6 +2,7 @@ package org.university.view;
 
 import org.university.persistence.DataInitializer;
 import org.university.controller.University;
+import org.university.utils.Reader;
 
 import java.util.Scanner;
 
@@ -40,7 +41,7 @@ public class Main {
                         displaySubjectsData(university);
                         break;
                     case 4:
-                        searchSubjectsByStudentId(university);
+                        triggerCreateNewInstructor(university);
                         break;
                     case 5:
                         triggerCreateNewStudent(university);
@@ -65,8 +66,8 @@ public class Main {
         System.out.println("\n Choose one option : \n" +
                 " 1. Print instructor's data \n" +
                 " 2. Print student's data \n" +
-                " 3. Print university's subjects \n" +
-                " 4. Search enrolled subjects, by student id \n" +
+                " 3. Print university's subjects data \n" +
+                " 4. Create new instructor \n" +
                 " 5. Create new student \n" +
                 " 6. Create new subject \n" +
                 " 7. Add student to a subject \n" +
@@ -81,12 +82,12 @@ public class Main {
         return "\n            No available elements            ";
     }
 
-    private static String comingBackMessage() {
-        return ">>>>>>>>> Coming back to principal menu <<<<<<<<<";
+    private static String invalidNumber() {
+        return "Input number is invalid";
     }
 
-    private static String errorMessage() {
-        return "\n       ❗       Error occurred       ❗       ";
+    private static String comingBackMessage() {
+        return ">>>>>>>>> Coming back to principal menu <<<<<<<<<";
     }
 
     /**
@@ -103,6 +104,26 @@ public class Main {
 
         for (int i = 0; i < university.getInstructorListSize(); i++) {
             System.out.println(university.getInstructorByIndex(i));
+        }
+
+        getInstructorSubjects(university);
+    }
+
+    /**
+     * This method get the subjects given by an instructor by instructor id.
+     *
+     * @param university University object for look up information
+     */
+    private static void getInstructorSubjects(University university) {
+        System.out.println("\n❊ \uD83D\uDC40 ❊ If you want to check subjects given by specific instructor ❊ \uD83D\uDC40 ❊\t");
+        System.out.println("              type the instructor id below, or type 0 to exit \n");
+
+        int instructorId = Reader.intScanner();
+
+        if (instructorId > 0) {
+            System.out.println(university.getSubjectsGivenByInstructor(instructorId));
+        } else if (instructorId < 0) {
+            System.out.println(invalidNumber());
         }
 
         System.out.println("\n" + comingBackMessage());
@@ -122,6 +143,26 @@ public class Main {
 
         for (int i = 0; i < university.getStudentListSize(); i++) {
             System.out.println(university.getStudentByIndex(i));
+        }
+
+        getStudentEnrolledSubjectsByStudentId(university);
+    }
+
+    /**
+     * This method get the subjects enrolled by student id.
+     *
+     * @param university University object for look up information
+     */
+    private static void getStudentEnrolledSubjectsByStudentId(University university) {
+        System.out.println("\n❊ \uD83D\uDC40 ❊ If you want to check the subjects in which student is enrolled ❊ \uD83D\uDC40 ❊\t");
+        System.out.println("                type the student id below, or type 0 to exit \n");
+
+        int studentId = Reader.intScanner();
+
+        if (studentId > 0) {
+            System.out.println(university.getStudentEnrolledSubjects(studentId));
+        } else if (studentId < 0) {
+            System.out.println(invalidNumber());
         }
 
         System.out.println("\n" + comingBackMessage());
@@ -152,43 +193,57 @@ public class Main {
      * @param university University object for look up information
      */
     private static void getSubjectDetail(University university) {
-        Scanner scan = new Scanner(System.in);
         System.out.println("\n❊ \uD83D\uDC40 ❊ If you want to check details of any subject ❊ \uD83D\uDC40 ❊\t");
-        System.out.println("           type the id below, or type 0 to exit \n");
+        System.out.println("        type the subject id below, or type 0 to exit \n");
 
-        try {
-            int subjectId = scan.nextInt();
-            if (subjectId > 0) {
-                System.out.println(university.getSubjectDetails(subjectId));
-            }
-        } catch (Exception ex) {
-            System.out.println(errorMessage());
+        int subjectId = Reader.intScanner();
+
+        if (subjectId > 0) {
+            System.out.println(university.getSubjectDetails(subjectId));
+        } else if (subjectId < 0) {
+            System.out.println(invalidNumber());
         }
 
         System.out.println("\n" + comingBackMessage());
     }
 
     /**
-     * This method get the subjects enrolled by student id.
+     * This method triggers the creation of new instructor.
      *
      * @param university University object for look up information
      */
-    private static void searchSubjectsByStudentId(University university) {
-        Scanner scan = new Scanner(System.in);
-        System.out.println("**** \uD83E\uDD13 **** Subjects in which student is enrolled **** \uD83E\uDD13 ****\n");
+    private static void triggerCreateNewInstructor(University university) {
+        System.out.println("**** \uD83D\uDE00 **** Section for create new instructor **** \uD83D\uDE00 ****\n");
 
-        try {
-            System.out.println("Type student id");
-            int studentId = scan.nextInt();
+        System.out.println("Type full name");
+        String fullName = Reader.stringScanner();
 
-            System.out.println(university.getStudentEnrolledSubjects(studentId));
+        System.out.println("Type username");
+        String username = Reader.stringScanner();
 
-        } catch (Exception ex) {
-            System.out.println(errorMessage());
+        System.out.println("Type base salary");
+        double baseSalary = Reader.intScanner();
+
+        System.out.println("Type: 1. for Full Time Instructor | 2. for Full Time Instructor");
+        int instructorType = Reader.intScanner();
+
+        int experienceOrActiveHrs = 0;
+
+        if(instructorType == 1){
+            System.out.println("Type experience years");
+            experienceOrActiveHrs = Reader.intScanner();
+        } else if (instructorType == 2) {
+            System.out.println("Type active hours per month");
+            experienceOrActiveHrs = Reader.intScanner();
+        }else{
+            System.out.println("\nOption not available");
         }
+
+        System.out.println("\n" + university.createNewInstructor(fullName, username, baseSalary, experienceOrActiveHrs, instructorType));
 
         System.out.println("\n" + comingBackMessage());
     }
+
 
     /**
      * This method triggers the creation of new student.
@@ -196,23 +251,18 @@ public class Main {
      * @param university University object for look up information
      */
     private static void triggerCreateNewStudent(University university) {
-        Scanner scan = new Scanner(System.in);
         System.out.println("**** \uD83D\uDE00 **** Section for create new student **** \uD83D\uDE00 ****\n");
 
-        try {
-            System.out.println("Type full name");
-            String fullName = scan.nextLine().trim();
+        System.out.println("Type full name");
+        String fullName = Reader.stringScanner();
 
-            System.out.println("Type username");
-            String username = scan.nextLine().trim();
+        System.out.println("Type username");
+        String username = Reader.stringScanner();
 
-            System.out.println("Type student age");
-            int studentAge = scan.nextInt();
+        System.out.println("Type student age");
+        int studentAge = Reader.intScanner();
 
-            System.out.println("\n" + university.createNewStudent(fullName, username, studentAge));
-        } catch (Exception ex) {
-            System.out.println(errorMessage());
-        }
+        System.out.println("\n" + university.createNewStudent(fullName, username, studentAge));
 
         System.out.println("\n" + comingBackMessage());
     }
@@ -226,17 +276,13 @@ public class Main {
         Scanner scan = new Scanner(System.in);
         System.out.println("**** \uD83D\uDCDA **** Section for create new subject **** \uD83D\uDCDA ****\n");
 
-        try {
-            System.out.println("Type subject name");
-            String subjectName = scan.nextLine().trim();
+        System.out.println("Type subject name");
+        String subjectName = Reader.stringScanner();
 
-            System.out.println("Type instructor id for the subject");
-            int instructorId = scan.nextInt();
+        System.out.println("Type instructor id for the subject");
+        int instructorId = Reader.intScanner();
 
-            System.out.println("\n" + university.createNewSubject(subjectName, instructorId));
-        } catch (Exception ex) {
-            System.out.println(errorMessage());
-        }
+        System.out.println("\n" + university.createNewSubject(subjectName, instructorId));
 
         System.out.println("\n" + comingBackMessage());
     }
@@ -250,17 +296,13 @@ public class Main {
         Scanner scan = new Scanner(System.in);
         System.out.println("**** ✏ **** Section for add student to a subject **** ✏ ****\n");
 
-        try {
-            System.out.println("Type subject id");
-            int subjectId = scan.nextInt();
+        System.out.println("Type subject id");
+        int subjectId = Reader.intScanner();
 
-            System.out.println("Type student id");
-            int studentId = scan.nextInt();
+        System.out.println("Type student id");
+        int studentId = Reader.intScanner();
 
-            System.out.println("\n" + university.addSubjectStudentById(subjectId, studentId));
-        } catch (Exception ex) {
-            System.out.println(errorMessage());
-        }
+        System.out.println("\n" + university.addSubjectStudentById(subjectId, studentId));
 
         System.out.println("\n" + comingBackMessage());
     }
