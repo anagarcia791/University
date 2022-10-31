@@ -161,35 +161,40 @@ public class University {
      * full time instructor or part-time instructor.
      * Here is validated if the username already exists.
      *
-     * @param fullName full name to create new instructor
-     * @param username username to create new instructor
-     * @param baseSalary base salary to create new instructor
+     * @param fullName              full name to create new instructor
+     * @param username              username to create new instructor
+     * @param baseSalary            base salary to create new instructor
      * @param experienceOrActiveHrs here you can write experience years or active hrs monthly to create new instructor
-     * @param instructorType instructor type has 2 possible options: 1. full time instructor or 2. part-time instructor
+     * @param instructorType        instructor type has 2 possible options: 1. full time instructor or 2. part-time instructor
      * @return a String with message of: success or failed instructor creation
      */
     public String createNewInstructor(String fullName, String username, Double baseSalary, Integer experienceOrActiveHrs, int instructorType) {
         String newInstructorResult = "Username already exists";
 
         if (checkIfUsernameExists(username)) {
-            Instructor newInstructor;
-            switch (instructorType) {
-                case 1:
-                    newInstructor = new FullTimeInstructor(fullName, username, baseSalary, experienceOrActiveHrs);
-                    this.instructorList.add(newInstructor);
-                    addUniversityMember(newInstructor);
-                    newInstructorResult = fullName + " added as new full time instructor";
-                    break;
-                case 2:
-                    newInstructor = new PartTimeInstructor(fullName, username, baseSalary, experienceOrActiveHrs);
-                    this.instructorList.add(newInstructor);
-                    addUniversityMember(newInstructor);
-                    newInstructorResult = fullName + " added as new part time instructor";
-                    break;
-                default:
-                    newInstructorResult = "Check the given information for create a new instructor";
-                    break;
+            newInstructorResult = "Check the given information for create a new instructor";
+
+            if (baseSalary > 0 && experienceOrActiveHrs > 0) {
+                Instructor newInstructor;
+                switch (instructorType) {
+                    case 1:
+                        newInstructor = new FullTimeInstructor(fullName, username, baseSalary, experienceOrActiveHrs);
+                        this.instructorList.add(newInstructor);
+                        addUniversityMember(newInstructor);
+                        newInstructorResult = fullName + " added as new full time instructor";
+                        break;
+                    case 2:
+                        newInstructor = new PartTimeInstructor(fullName, username, baseSalary, experienceOrActiveHrs);
+                        this.instructorList.add(newInstructor);
+                        addUniversityMember(newInstructor);
+                        newInstructorResult = fullName + " added as new part time instructor";
+                        break;
+                    default:
+                        newInstructorResult = "Check the given information for create a new instructor";
+                        break;
+                }
             }
+
         }
 
         return newInstructorResult;
@@ -199,8 +204,8 @@ public class University {
      * This method create a new Student.
      * Here is validated if the username already exists.
      *
-     * @param fullName full name to create new student
-     * @param username username to create new student
+     * @param fullName   full name to create new student
+     * @param username   username to create new student
      * @param studentAge student age to create new student
      * @return a String with message of: success or failed student creation
      */
@@ -208,10 +213,15 @@ public class University {
         String newStudentResult = "Username already exists";
 
         if (checkIfUsernameExists(username)) {
-            Student newStudent = new Student(fullName, username, studentAge);
-            this.studentList.add(newStudent);
-            addUniversityMember(newStudent);
-            newStudentResult = fullName + " added as new student";
+            newStudentResult = "Check the given information for create a new student";
+
+            if (studentAge > 0) {
+                Student newStudent = new Student(fullName, username, studentAge);
+                this.studentList.add(newStudent);
+                addUniversityMember(newStudent);
+                newStudentResult = fullName + " added as new student";
+            }
+
         }
 
         return newStudentResult;
@@ -222,46 +232,77 @@ public class University {
      * Here is validated if the subject already exists,
      * and if the instructor id is correct.
      *
-     * @param subjectName subject name to create new subject
+     * @param subjectName  subject name to create new subject
      * @param instructorId id of one instructor already created responsible for the new subject
      * @return a String with message of: success or failed subject creation
      */
     public String createNewSubject(String subjectName, int instructorId) {
-        String newSubjectResult = "The subject already exists, or the id is incorrect";
+        String newSubjectResult = "The subject already exists";
 
         Instructor instructor = getInstructorById(instructorId);
 
-        if (checkIfSubjectExists(subjectName) && instructor.getInstructorId() != null) {
-            Subject newSubject = new Subject(subjectName, instructor);
-            this.subjectList.add(newSubject);
+        if (checkIfSubjectExists(subjectName)) {
+            newSubjectResult = "Check the given information for create a new subject";
 
-            newSubjectResult = "New subject " + "'" + subjectName + "'" + " successfully created";
+            if (instructor.getInstructorId() != null) {
+                Subject newSubject = new Subject(subjectName, instructor);
+                this.subjectList.add(newSubject);
+
+                newSubjectResult = "New subject " + "'" + subjectName + "'" + " successfully created";
+            }
+
         }
 
         return newSubjectResult;
     }
 
     /**
-     * This method return additional information for specific subject,
-     * like instructor username, and id and username of students enrolled.
+     * This method check all available subjects, and look up
+     * for those where the instructor in included.
      *
-     * @param subjectId id of subject to look up for information
-     * @return a String with the subject details or error in the search
+     * @param instructor a Instructor object for evaluation
+     * @return a String empty or with the subjects where the instructor is included
      */
-    public String getSubjectDetails(int subjectId) {
-        Subject subject = getSubjectById(subjectId);
+    public String getSubjectsGivenByInstructorList(Instructor instructor) {
+        String subjectsByInstructor = "";
 
-        String subjectsDetail = "The id is incorrect";
+        List<Subject> subjectList =
+                this.subjectList.stream().
+                        filter(subject -> subject.instructorGivesTheSubject(instructor)).collect(Collectors.toList());
 
-        if (subject.getSubjectId() != null) {
-            String instructorUsername = subject.getInstructorUsername();
-            String subjectStudents = subject.getSubjectStudents();
 
-            subjectsDetail =
-                    "Instructor: " + instructorUsername + "\n" + "Students: ⤵" + "\n" + subjectStudents;
+        for (Subject subject : subjectList) {
+            subjectsByInstructor += " - " + subject.getSubjectName();
         }
 
-        return subjectsDetail;
+        return subjectsByInstructor;
+    }
+
+    /**
+     * This method uses getSubjectsGivenByInstructorList() method
+     * for modularize the output message, where the instructor of
+     * a subject is equal to the input.
+     *
+     * @param instructorId instructor id for search the complete object
+     * @return a String with the subjects given by the instructor or error in the search
+     */
+    public String getSubjectsGivenByInstructor(int instructorId) {
+        Instructor instructor = getInstructorById(instructorId);
+
+        String subjectsGivenByInstructor = "The id is incorrect";
+
+        if (instructor.getInstructorId() != null) {
+            subjectsGivenByInstructor = getSubjectsGivenByInstructorList(instructor);
+
+            if (subjectsGivenByInstructor.length() == 0) {
+                subjectsGivenByInstructor = "The instructor " + instructor.getUsername() + " doesn't have subjects assigned";
+            } else {
+                subjectsGivenByInstructor = "Subjects given by " + instructor.getUsername() + ": " + subjectsGivenByInstructor;
+            }
+
+        }
+
+        return subjectsGivenByInstructor;
     }
 
     /**
@@ -303,7 +344,7 @@ public class University {
             subjectsByStudentId = getStudentEnrolledSubjectsList(student);
 
             if (subjectsByStudentId.length() == 0) {
-                subjectsByStudentId = student.getUsername() + " doesn't have subjects enrolled";
+                subjectsByStudentId = "The student " + student.getUsername() + " doesn't have subjects enrolled";
             } else {
                 subjectsByStudentId = "Subjects enrolled for " + student.getUsername() + ": " + subjectsByStudentId;
             }
@@ -311,6 +352,28 @@ public class University {
         }
 
         return subjectsByStudentId;
+    }
+
+    /**
+     * This method return additional information for specific subject,
+     * like instructor username, and id and username of students enrolled.
+     *
+     * @param subjectId id of subject to look up for information
+     * @return a String with the subject details or error in the search
+     */
+    public String getSubjectDetails(int subjectId) {
+        Subject subject = getSubjectById(subjectId);
+
+        String subjectsDetail = "The id is incorrect";
+
+        if (subject.getSubjectId() != null) {
+            subjectsDetail =
+                    "Instructor: " + subject.getInstructorUsername() + "\n" +
+                            subject.getSubjectName() + "'s students: " +
+                            subject.getSubjectStudents();
+        }
+
+        return subjectsDetail;
     }
 
     /**
@@ -328,7 +391,7 @@ public class University {
         if (subject.getSubjectName() != null && student.getStudentId() != null) {
             return subject.addSubjectStudent(student);
         } else {
-            return "Check the subject or student id";
+            return "Check the subject and student id";
         }
     }
 }

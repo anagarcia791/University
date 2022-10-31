@@ -42,6 +42,28 @@ public class Subject {
     }
 
     /**
+     * This method return boolean after evaluation of
+     * instructor inside Subject object.
+     *
+     * @param instructor a Instructor object for evaluation
+     * @return boolean according if instructor is the same of the instructor in Subject object
+     */
+    public boolean instructorGivesTheSubject(Instructor instructor) {
+        return this.subjectInstructor == instructor;
+    }
+
+    /**
+     * This method return boolean after evaluation of
+     * student containment inside list of students.
+     *
+     * @param student a Student object for evaluation
+     * @return boolean according containment of the student inside students list of subject
+     */
+    public boolean studentIsEnrolledInSubject(Student student) {
+        return this.subjectStudentList.contains(student);
+    }
+
+    /**
      * This method return students enrolled in a specific subject,
      * it checks the subject student list to give id and username
      * for each one in the list.
@@ -52,7 +74,7 @@ public class Subject {
         String subjectStudents = "";
 
         if (this.subjectStudentList.size() == 0) {
-            subjectStudents = "No students enrolled in " + this.subjectName;
+            subjectStudents = " No students enrolled";
         }
 
         for (Student student : this.subjectStudentList) {
@@ -60,17 +82,6 @@ public class Subject {
         }
 
         return subjectStudents;
-    }
-
-    /**
-     * This method return boolean after evaluation of
-     * student containment inside list of students.
-     *
-     * @param student a Student object for evaluation
-     * @return boolean according containment of the student inside students list of subject.
-     */
-    public boolean studentIsEnrolledInSubject(Student student) {
-        return this.subjectStudentList.contains(student);
     }
 
     /**
